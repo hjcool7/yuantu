@@ -22,6 +22,11 @@
 		383299841D3765DA0057EFEA /* PictureListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3832997F1D3765DA0057EFEA /* PictureListViewController.m */; };
 		383299851D3765DA0057EFEA /* PictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 383299821D3765DA0057EFEA /* PictureCollectionViewCell.m */; };
 		383299881D376D600057EFEA /* PictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383299871D376D600057EFEA /* PictureViewController.m */; };
+		3832998B1D38BE0E0057EFEA /* Asset.m in Sources */ = {isa = PBXBuildFile; fileRef = 3832998A1D38BE0E0057EFEA /* Asset.m */; };
+		3832998E1D38BE1A0057EFEA /* AssetCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3832998D1D38BE1A0057EFEA /* AssetCollection.m */; };
+		383299911D38C1E10057EFEA /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383299901D38C1E10057EFEA /* AlbumViewController.m */; };
+		383299941D38E7920057EFEA /* AlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 383299931D38E7920057EFEA /* AlbumTableViewCell.m */; };
+		383299971D38F1BC0057EFEA /* AlbumPictureListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383299961D38F1BC0057EFEA /* AlbumPictureListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +78,16 @@
 		383299821D3765DA0057EFEA /* PictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureCollectionViewCell.m; sourceTree = "<group>"; };
 		383299861D376D600057EFEA /* PictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureViewController.h; sourceTree = "<group>"; };
 		383299871D376D600057EFEA /* PictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureViewController.m; sourceTree = "<group>"; };
+		383299891D38BE0E0057EFEA /* Asset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asset.h; sourceTree = "<group>"; };
+		3832998A1D38BE0E0057EFEA /* Asset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Asset.m; sourceTree = "<group>"; };
+		3832998C1D38BE1A0057EFEA /* AssetCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCollection.h; sourceTree = "<group>"; };
+		3832998D1D38BE1A0057EFEA /* AssetCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCollection.m; sourceTree = "<group>"; };
+		3832998F1D38C1E10057EFEA /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
+		383299901D38C1E10057EFEA /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
+		383299921D38E7920057EFEA /* AlbumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumTableViewCell.h; sourceTree = "<group>"; };
+		383299931D38E7920057EFEA /* AlbumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumTableViewCell.m; sourceTree = "<group>"; };
+		383299951D38F1BC0057EFEA /* AlbumPictureListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumPictureListViewController.h; sourceTree = "<group>"; };
+		383299961D38F1BC0057EFEA /* AlbumPictureListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumPictureListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +205,10 @@
 				3832996B1D3742E60057EFEA /* UIView+Layout.m */,
 				383299781D3764F20057EFEA /* PictureManager.h */,
 				383299791D3764F20057EFEA /* PictureManager.m */,
+				383299891D38BE0E0057EFEA /* Asset.h */,
+				3832998A1D38BE0E0057EFEA /* Asset.m */,
+				3832998C1D38BE1A0057EFEA /* AssetCollection.h */,
+				3832998D1D38BE1A0057EFEA /* AssetCollection.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -204,6 +223,10 @@
 				383299801D3765DA0057EFEA /* View */,
 				383299861D376D600057EFEA /* PictureViewController.h */,
 				383299871D376D600057EFEA /* PictureViewController.m */,
+				3832998F1D38C1E10057EFEA /* AlbumViewController.h */,
+				383299901D38C1E10057EFEA /* AlbumViewController.m */,
+				383299951D38F1BC0057EFEA /* AlbumPictureListViewController.h */,
+				383299961D38F1BC0057EFEA /* AlbumPictureListViewController.m */,
 			);
 			path = PictureList;
 			sourceTree = "<group>";
@@ -213,6 +236,8 @@
 			children = (
 				383299811D3765DA0057EFEA /* PictureCollectionViewCell.h */,
 				383299821D3765DA0057EFEA /* PictureCollectionViewCell.m */,
+				383299921D38E7920057EFEA /* AlbumTableViewCell.h */,
+				383299931D38E7920057EFEA /* AlbumTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,12 +371,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3832998E1D38BE1A0057EFEA /* AssetCollection.m in Sources */,
 				383299831D3765DA0057EFEA /* MainViewController.m in Sources */,
+				383299911D38C1E10057EFEA /* AlbumViewController.m in Sources */,
 				3832995D1D373A600057EFEA /* AppDelegate.m in Sources */,
+				383299941D38E7920057EFEA /* AlbumTableViewCell.m in Sources */,
 				3832995F1D373A600057EFEA /* BaseViewController.m in Sources */,
+				383299971D38F1BC0057EFEA /* AlbumPictureListViewController.m in Sources */,
 				383299631D373A600057EFEA /* main.m in Sources */,
 				3832996D1D3742E60057EFEA /* UIView+Layout.m in Sources */,
 				3832997A1D3764F20057EFEA /* PictureManager.m in Sources */,
+				3832998B1D38BE0E0057EFEA /* Asset.m in Sources */,
 				383299851D3765DA0057EFEA /* PictureCollectionViewCell.m in Sources */,
 				383299841D3765DA0057EFEA /* PictureListViewController.m in Sources */,
 				3832996C1D3742E60057EFEA /* UIView+AutoLayout.m in Sources */,
@@ -478,10 +508,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 成 季 (RYTNL4CL77)";
 				INFOPLIST_FILE = yuantu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caitou.yuantu;
 				PRODUCT_NAME = "原图";
+				PROVISIONING_PROFILE = "55fea068-7d01-4a63-af4f-d8b6335e4248";
 			};
 			name = Debug;
 		};
@@ -489,10 +521,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 成 季 (RYTNL4CL77)";
 				INFOPLIST_FILE = yuantu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caitou.yuantu;
 				PRODUCT_NAME = "原图";
+				PROVISIONING_PROFILE = "55fea068-7d01-4a63-af4f-d8b6335e4248";
 			};
 			name = Release;
 		};

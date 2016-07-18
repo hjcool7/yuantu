@@ -20,13 +20,18 @@
     if (self)
     {
         [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"NavBarBackground"] forBarMetrics:UIBarMetricsDefault];
+        self.navigationBar.titleTextAttributes = @
+        {
+            NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
+            NSForegroundColorAttributeName : [UIColor whiteColor]
+        };
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning {

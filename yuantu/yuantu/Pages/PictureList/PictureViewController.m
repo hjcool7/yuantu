@@ -31,6 +31,7 @@
     _notAuthorizedView = [[UIView alloc] init];
     _notAuthorizedView.translatesAutoresizingMaskIntoConstraints = NO;
     _notAuthorizedView.backgroundColor = [UIColor whiteColor];
+    _notAuthorizedView.hidden = YES;
     [self.view addSubview:_notAuthorizedView];
     [_notAuthorizedView setEdgeConstraints:UIEdgeInsetsZero];
     

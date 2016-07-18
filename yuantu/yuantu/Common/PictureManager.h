@@ -9,21 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <Photos/Photos.h>
 
-@interface PHAsset(PictureManager)
-
-@property (nonatomic) BOOL isOriginal;
-
-@end
+@class Asset;
+@class AssetCollection;
 
 extern NSString *const PictureManagerChangeNotification;
 
 @interface PictureManager : NSObject
 
-@property (nonatomic,copy,readonly) NSArray<PHAsset *> *allPictures;
+@property (nonatomic,copy,readonly) NSArray<Asset *> *allPictures;
+@property (nonatomic,copy,readonly) NSArray<AssetCollection *> *allAlbums;
 
 + (instancetype)sharedManager;
 
-- (void)fetchAllPictures;
+- (void)fetchAllPicturesWithCompletion:(void(^)(NSArray<Asset *> *allPictures))completion;
+- (void)fetchAllAlbumsWithCompletion:(void(^)(NSArray<AssetCollection *> *allAlbums))completion;
 - (BOOL)authorized;
 
 @end

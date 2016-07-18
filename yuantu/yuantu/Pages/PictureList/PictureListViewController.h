@@ -7,10 +7,11 @@
 //
 
 #import "PictureViewController.h"
-#import <Photos/Photos.h>
+
+@class Asset;
 
 @interface PictureListViewController : PictureViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
-@property (nonatomic,copy) NSArray<PHAsset *> *pictures;
+@property (nonatomic,copy) NSArray<Asset *> *pictures;
 
 @end

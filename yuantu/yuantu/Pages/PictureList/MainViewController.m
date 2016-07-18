@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "PictureManager.h"
+#import "AlbumViewController.h"
 
 @interface MainViewController ()
 
@@ -22,18 +23,17 @@
     self.leftNavButtonImage = [UIImage imageNamed:@"MainAlbums"];
     self.rightNavButtonImage = [UIImage imageNamed:@"MainCamera"];
     
-    [[PictureManager sharedManager] fetchAllPictures];
-}
-
-- (void)pictureChanged
-{
-    self.pictures = [PictureManager sharedManager].allPictures;
-    [super pictureChanged];
+    [[PictureManager sharedManager] fetchAllPicturesWithCompletion:^(NSArray<PHAsset *> *allPictures)
+     {
+         self.pictures = [PictureManager sharedManager].allPictures;
+         [self pictureChanged];
+     }];
 }
 
 - (void)leftNavButtonClicked:(id)sender
 {
-    
+    AlbumViewController *albumViewController = [[AlbumViewController alloc] init];
+    [self.navigationController pushViewController:albumViewController animated:YES];
 }
 
 - (void)rightNavButtonClicked:(id)sender

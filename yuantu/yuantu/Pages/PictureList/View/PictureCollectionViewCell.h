@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Photos/Photos.h>
+
+@class Asset;
 
 extern NSString * const kPictureCollectionViewCellReuseId;
 
 @interface PictureCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic) CGSize pictureSize;
-@property (nonatomic,strong) PHAsset *asset;
+@property (nonatomic,strong) Asset *asset;
 
 @end

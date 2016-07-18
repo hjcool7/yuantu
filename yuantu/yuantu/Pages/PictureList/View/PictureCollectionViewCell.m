@@ -9,6 +9,7 @@
 #import "PictureCollectionViewCell.h"
 #import "UIView+AutoLayout.h"
 #import "PictureManager.h"
+#import "Asset.h"
 
 NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCellReuseId";
 
@@ -47,7 +48,7 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
     return self;
 }
 
-- (void)setAsset:(PHAsset *)asset
+- (void)setAsset:(Asset *)asset
 {
     if (_asset == asset)
     {
@@ -55,26 +56,22 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
     }
     
     _asset = asset;
-    PHImageManager *imageManager = [PHImageManager defaultManager];
-    [imageManager cancelImageRequest:_requestId];
+    [Asset cancelImageRequest:_requestId];
     
     _imageView.hidden = YES;
     _eyeImageView.hidden = _asset.isOriginal;
     
-    
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.version = PHImageRequestOptionsVersionOriginal;
-    _requestId = [imageManager requestImageForAsset:_asset targetSize:self.pictureSize contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
+    [_asset requestImageForTargetSize:self.pictureSize resultHandler:^(UIImage *result, NSDictionary *info)
     {
         dispatch_async(dispatch_get_main_queue(), ^
-        {
-           if ([[info objectForKey:PHImageCancelledKey] boolValue])
            {
-               return;
-           }
-           _imageView.hidden = NO;
-           _imageView.image = result;
-        });
+               if ([Asset isCancelled:info])
+               {
+                   return;
+               }
+               _imageView.hidden = NO;
+               _imageView.image = result;
+           });
     }];
 }
 
