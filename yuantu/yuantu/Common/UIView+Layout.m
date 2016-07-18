@@ -1,9 +1,9 @@
 //
 //  UIView+Layout.m
-//  bclient
+//  yuantu
 //
 //  Created by 季成 on 16/2/16.
-//  Copyright © 2016年 ayibang. All rights reserved.
+//  Copyright © 2016年 季成. All rights reserved.
 //
 
 #import "UIView+Layout.h"
