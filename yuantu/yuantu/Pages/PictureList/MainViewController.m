@@ -9,8 +9,10 @@
 #import "MainViewController.h"
 #import "PictureManager.h"
 #import "AlbumViewController.h"
+#import "UIImage+Orientation.h"
+#import "SharePictureViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @end
 
@@ -38,7 +40,27 @@
 
 - (void)rightNavButtonClicked:(id)sender
 {
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.view.backgroundColor = [UIColor orangeColor];
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.delegate = self;
+        picker.allowsEditing = NO;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    image = [image fixedOrientationImage];
     
+    [picker dismissViewControllerAnimated:YES completion:^
+     {
+         SharePictureViewController *sharePictureViewController = [[SharePictureViewController alloc] initWithImage:image];
+         [self.navigationController pushViewController:sharePictureViewController animated:YES];
+     }];
 }
 
 - (void)didReceiveMemoryWarning {

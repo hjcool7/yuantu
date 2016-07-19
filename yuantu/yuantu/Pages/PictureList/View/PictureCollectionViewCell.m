@@ -27,6 +27,9 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
     if (self)
     {
         _imageView = [[UIImageView alloc] init];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill
+        ;
+        _imageView.clipsToBounds = YES;
         _imageView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_imageView];
         [_imageView setEdgeConstraints:UIEdgeInsetsZero];

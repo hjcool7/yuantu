@@ -17,6 +17,7 @@
 - (id)initWithAsset:(PHAsset *)asset;
 
 - (PHImageRequestID)requestImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
+- (PHImageRequestID)requestLargeImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
 
 + (BOOL)isCancelled:(NSDictionary *)info;
 + (void)cancelImageRequest:(PHImageRequestID)requestID;

@@ -16,6 +16,9 @@
 @end
 
 @implementation Asset
+{
+    BOOL _hasReadMetadata;
+}
 
 - (id)initWithAsset:(PHAsset *)asset
 {
@@ -23,9 +26,22 @@
     if (self)
     {
         self.asset = asset;
-        self.isOriginal = [self isPureImageWithAsset:self.asset];
+//        self.isOriginal = [self isPureImageWithAsset:self.asset];
+        _hasReadMetadata = NO;
+        self.isOriginal = YES;
+        
     }
     return self;
+}
+
+- (BOOL)isOriginal
+{
+    if (!_hasReadMetadata)
+    {
+        self.isOriginal = [self isPureImageWithAsset:self.asset];
+        _hasReadMetadata = YES;
+    }
+    return _isOriginal;
 }
 
 - (BOOL)isPureImageWithAsset:(PHAsset *)asset
@@ -73,7 +89,21 @@
 {
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.version = PHImageRequestOptionsVersionOriginal;
-    PHImageRequestID requestId = [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:targetSize contentMode:PHImageContentModeAspectFill options:options resultHandler:resultHandler];
+    CGSize size;
+    size.width = targetSize.width * [UIScreen mainScreen].scale;
+    size.height = targetSize.height * [UIScreen mainScreen].scale;
+    PHImageRequestID requestId = [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:resultHandler];
+    return requestId;
+}
+
+- (PHImageRequestID)requestLargeImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler
+{
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.version = PHImageRequestOptionsVersionOriginal;
+    CGSize size;
+    size.width = targetSize.width * [UIScreen mainScreen].scale;
+    size.height = targetSize.height * [UIScreen mainScreen].scale;
+    PHImageRequestID requestId = [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFit options:options resultHandler:resultHandler];
     return requestId;
 }
 

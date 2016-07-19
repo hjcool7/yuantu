@@ -35,12 +35,10 @@
     [self.view addSubview:_notAuthorizedView];
     [_notAuthorizedView setEdgeConstraints:UIEdgeInsetsZero];
     
-    UILabel *notAuthorizedTextLabel = [[UILabel alloc] init];
-    notAuthorizedTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    notAuthorizedTextLabel.backgroundColor = [UIColor clearColor];
-    notAuthorizedTextLabel.text = @"Not Authorized";
-    [_notAuthorizedView addSubview:notAuthorizedTextLabel];
-    [notAuthorizedTextLabel setAlignParentCenter];
+    UIImageView *notAuthorizedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CommonNotAuthorized"]];
+    notAuthorizedImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [_notAuthorizedView addSubview:notAuthorizedImageView];
+    [notAuthorizedImageView setAlignParentCenter];
 }
 
 - (void)showNotAuthorizedView

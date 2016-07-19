@@ -9,6 +9,7 @@
 #import "PictureListViewController.h"
 #import "UIView+AutoLayout.h"
 #import "PictureCollectionViewCell.h"
+#import "ShowPictureViewController.h"
 
 @interface PictureListViewController ()
 
@@ -60,6 +61,12 @@
     cell.pictureSize = [self pictureSize];
     cell.asset = self.pictures[indexPath.row];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ShowPictureViewController *showPictureViewController = [[ShowPictureViewController alloc] initWithAssets:self.pictures index:indexPath.item];
+    [self.navigationController pushViewController:showPictureViewController animated:YES];
 }
 
 - (CGSize)pictureSize
