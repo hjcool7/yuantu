@@ -38,6 +38,7 @@
     [mediaMessage setThumbImage:[asset thumbnailImage]];
     WXImageObject *imageObject = [WXImageObject object];
     imageObject.imageData = [asset imageData];
+    mediaMessage.mediaObject = imageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
     req.bText = NO;
@@ -53,6 +54,7 @@
     [mediaMessage setThumbImage:image];
     WXImageObject *imageObject = [WXImageObject object];
     imageObject.imageData = UIImagePNGRepresentation(image);
+    mediaMessage.mediaObject = imageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
     req.bText = NO;
