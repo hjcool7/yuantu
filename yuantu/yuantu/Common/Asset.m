@@ -32,15 +32,15 @@
     return self;
 }
 
-//- (BOOL)isOriginal
-//{
-//    if (!_hasReadMetadata)
-//    {
-//        self.isOriginal = [self isPureImageWithAsset:self.asset];
-//        _hasReadMetadata = YES;
-//    }
-//    return _isOriginal;
-//}
+- (BOOL)isOriginal
+{
+    if (!_hasReadMetadata)
+    {
+        self.isOriginal = [self isPureImageWithAsset:self.asset];
+        _hasReadMetadata = YES;
+    }
+    return _isOriginal;
+}
 
 - (BOOL)isPureImageWithAsset:(PHAsset *)asset
 {
