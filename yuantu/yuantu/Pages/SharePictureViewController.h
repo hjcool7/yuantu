@@ -13,9 +13,9 @@
 @interface SharePictureViewController : PictureViewController
 
 @property (nonatomic,strong,readonly) Asset *asset;
-@property (nonatomic,strong,readonly) UIImage *image;
+@property (nonatomic,copy,readonly) NSDictionary *info;
 
 - (id)initWithAsset:(Asset *)asset;
-- (id)initWithImage:(UIImage *)image;
+- (id)initWithMediaInfo:(NSDictionary *)info;
 
 @end

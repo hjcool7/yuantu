@@ -26,23 +26,21 @@
     if (self)
     {
         self.asset = asset;
-//        self.isOriginal = [self isPureImageWithAsset:self.asset];
         _hasReadMetadata = NO;
         self.isOriginal = YES;
-        
     }
     return self;
 }
 
-- (BOOL)isOriginal
-{
-    if (!_hasReadMetadata)
-    {
-        self.isOriginal = [self isPureImageWithAsset:self.asset];
-        _hasReadMetadata = YES;
-    }
-    return _isOriginal;
-}
+//- (BOOL)isOriginal
+//{
+//    if (!_hasReadMetadata)
+//    {
+//        self.isOriginal = [self isPureImageWithAsset:self.asset];
+//        _hasReadMetadata = YES;
+//    }
+//    return _isOriginal;
+//}
 
 - (BOOL)isPureImageWithAsset:(PHAsset *)asset
 {
@@ -83,6 +81,36 @@
          metadataDic = [self metadataFromImageData:imageData];
      }];
     return metadataDic;
+}
+
+- (NSData *)imageData
+{
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.synchronous = YES;
+    __block NSData *data = nil;
+    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
+     {
+         data = imageData;
+     }];
+    return data;
+}
+
+- (UIImage *)thumbnailImage
+{
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.synchronous = YES;
+    options.version = PHImageRequestOptionsVersionOriginal;
+    CGSize size = CGSizeMake(100, 100);
+    __block UIImage *image = nil;
+    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
+    {
+        BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
+        if (downloadFinined)
+        {
+            image = result;
+        }
+    }];
+    return image;
 }
 
 - (PHImageRequestID)requestImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler

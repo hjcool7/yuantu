@@ -19,6 +19,9 @@
 - (PHImageRequestID)requestImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
 - (PHImageRequestID)requestLargeImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
 
+- (UIImage *)thumbnailImage;
+- (NSData *)imageData;
+
 + (BOOL)isCancelled:(NSDictionary *)info;
 + (void)cancelImageRequest:(PHImageRequestID)requestID;
 

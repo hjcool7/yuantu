@@ -85,7 +85,7 @@ NSString *const kAlbumTableViewCellReuseId = @"kAlbumTableViewCellReuseId";
     _collection = collection;
     _titleLabel.text = _collection.title;
     _countLabel.text = [NSString stringWithFormat:@"%ld张",(long)(_collection.count)];
-    _originalPictureCountLabel.text = [NSString stringWithFormat:@"原图%ld张",(long)(_collection.originalPictureCount)];;
+//    _originalPictureCountLabel.text = [NSString stringWithFormat:@"原图%ld张",(long)(_collection.originalPictureCount)];
     
     [Asset cancelImageRequest:_requestId];
     

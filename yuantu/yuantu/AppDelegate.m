@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "NavigationController.h"
 #import "MainViewController.h"
+#import "WXApiManager.h"
+#import "QQApiManager.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +18,34 @@
 
 @implementation AppDelegate
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    if ([WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]])
+    {
+        return YES;
+    }
+    
+    if ([TencentOAuth HandleOpenURL:url])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if ([WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]])
+    {
+        return YES;
+    }
+    
+    if ([TencentOAuth HandleOpenURL:url])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -24,6 +54,8 @@
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
 
+    [[WXApiManager sharedManager] registerApp];
+    
     return YES;
 }
 

@@ -47,10 +47,10 @@
             
             Asset *asset = [[Asset alloc] initWithAsset:phAsset];
             [assets addObject:asset];
-            if (asset.isOriginal)
-            {
-                originalPictureCount++;
-            }
+//            if (asset.isOriginal)
+//            {
+//                originalPictureCount++;
+//            }
         }
         self.assets = assets;
         self.count = self.assets.count;

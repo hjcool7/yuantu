@@ -52,13 +52,10 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    image = [image fixedOrientationImage];
-    
+{    
     [picker dismissViewControllerAnimated:YES completion:^
      {
-         SharePictureViewController *sharePictureViewController = [[SharePictureViewController alloc] initWithImage:image];
+         SharePictureViewController *sharePictureViewController = [[SharePictureViewController alloc] initWithMediaInfo:info];
          [self.navigationController pushViewController:sharePictureViewController animated:YES];
      }];
 }

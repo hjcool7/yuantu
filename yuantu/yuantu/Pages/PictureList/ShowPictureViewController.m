@@ -12,6 +12,8 @@
 #import "ShowPicturePageViewController.h"
 #import "Toast.h"
 #import "SharePictureViewController.h"
+#import "UIButton+BackgroundColor.h"
+#import "UIColor+Hex.h"
 
 @interface ShowPictureViewController ()<UIPageViewControllerDataSource,UIPageViewControllerDelegate>
 
@@ -23,6 +25,7 @@
 @implementation ShowPictureViewController
 {
     UIPageViewController *_pageViewController;
+    UIButton *_shareButton;
 }
 
 - (id)initWithAssets:(NSArray<Asset *> *)assets index:(NSInteger)index;
@@ -45,7 +48,7 @@
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"MainTitleImage"]];
 
     UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
+    pageViewController.delegate = self;
     pageViewController.dataSource = self;
     ShowPicturePageViewController *initialViewController =[self viewControllerWithIndex:self.index];
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];
@@ -71,7 +74,8 @@
     [shareButton setTitle:@"分享" forState:UIControlStateNormal];
     shareButton.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     [shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    shareButton.backgroundColor = [UIColor redColor];
+    [shareButton bg_setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];
+    [shareButton bg_setBackgroundColor:[UIColor hex_colorWithARGBHex:0xFFb3b3b3] forState:UIControlStateDisabled];
     shareButton.clipsToBounds = YES;
     shareButton.layer.cornerRadius = 4;
     [shareButton addTarget:self action:@selector(shareButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -80,6 +84,9 @@
     [shareButton setHeightConstraint:40];
     [shareButton setWidthMatchParentWithPadding:40];
     
+    shareButton.enabled = initialViewController.asset.isOriginal;
+    
+    _shareButton = shareButton;
     _pageViewController = pageViewController;
 }
 
@@ -90,10 +97,6 @@
     {
         SharePictureViewController *sharePictureViewController = [[SharePictureViewController alloc] initWithAsset:showPicturePageViewController.asset];
         [self.navigationController pushViewController:sharePictureViewController animated:YES];
-    }
-    else
-    {
-        [Toast showToastWithText:@"不能分享"];
     }
 }
 
@@ -114,6 +117,12 @@
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     return [self viewControllerWithIndex:((ShowPicturePageViewController *)viewController).index + 1];
+}
+
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    ShowPicturePageViewController *showPicturePageViewController = [_pageViewController.viewControllers firstObject];
+    _shareButton.enabled = showPicturePageViewController.asset.isOriginal;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -48,6 +48,10 @@
 - (void)pictureChanged
 {
     [_collectionView reloadData];
+    if (self.pictures.count > 0)
+    {
+        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.pictures.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
