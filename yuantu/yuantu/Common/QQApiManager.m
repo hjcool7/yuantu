@@ -2,7 +2,7 @@
 //  QQApiManager.m
 //  yuantu
 //
-//  Created by ayibang on 16/7/21.
+//  Created by 季成 on 16/7/21.
 //  Copyright © 2016年 jicheng. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 #import "UIImage+Orientation.h"
 #import <TencentOpenAPI/QQApiInterfaceObject.h>
 #import <TencentOpenAPI/QQApiInterface.h>
+#import "Toast.h"
 
 @implementation QQApiManager
 {
@@ -29,7 +30,12 @@
 
 - (void)registerApp
 {
-    _oauth = [[TencentOAuth alloc] initWithAppId:@"1105486601" andDelegate:self];
+    _oauth = [[TencentOAuth alloc] initWithAppId:@"1105500046" andDelegate:self];
+}
+
+- (BOOL)canShare
+{
+    return ([QQApiInterface isQQSupportApi] && [QQApiInterface isQQInstalled]);
 }
 
 - (void)shareWithAsset:(Asset *)asset
@@ -57,6 +63,24 @@
 }
 
 - (void)tencentDidNotNetWork
+{
+    
+}
+
+- (void)onReq:(QQBaseReq *)req
+{
+    
+}
+
+- (void)onResp:(QQBaseResp *)resp
+{
+    if ([resp isKindOfClass:[SendMessageToQQResp class]])
+    {
+        [Toast showToastWithText:resp.result ? : @""];
+    }
+}
+
+- (void)isOnlineResponse:(NSDictionary *)response
 {
     
 }

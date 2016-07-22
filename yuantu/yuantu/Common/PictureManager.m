@@ -16,6 +16,7 @@ NSString *const PictureManagerChangeNotification = @"PictureManagerChangeNotific
 
 @property (nonatomic,copy,readwrite) NSArray<Asset *> *allPictures;
 @property (nonatomic,copy,readwrite) NSArray<AssetCollection *> *allAlbums;
+@property (nonatomic,strong,readwrite) PHCachingImageManager *imageManager;
 
 @end
 
@@ -37,6 +38,7 @@ NSString *const PictureManagerChangeNotification = @"PictureManagerChangeNotific
     if (self)
     {
         [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
+        self.imageManager = [[PHCachingImageManager alloc] init];
     }
     return self;
 }
@@ -87,23 +89,32 @@ NSString *const PictureManagerChangeNotification = @"PictureManagerChangeNotific
      {
          if ([self authorized])
          {
+             NSMutableArray *array = [[NSMutableArray alloc] init];
             dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
             {
                 PHFetchOptions *options = [[PHFetchOptions alloc] init];
-                options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+                options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:YES]];
                 PHFetchResult *result = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:options];
                 NSMutableArray *assets = [[NSMutableArray alloc] init];
+                
                 for (PHAsset *phAsset in result)
                 {
                     if (![phAsset isKindOfClass:[PHAsset class]])
                     {
                         continue;
                     }
+                    [array insertObject:phAsset atIndex:0];
                     [assets addObject:[[Asset alloc] initWithAsset:phAsset]];
                 }
                 self.allPictures = assets;
             });
+             
+             PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+             options.version = PHImageRequestOptionsVersionOriginal;
+             CGFloat size = floor(([UIScreen mainScreen].bounds.size.width - 5) / 4) * [UIScreen mainScreen].scale;
+             [self.imageManager startCachingImagesForAssets:array targetSize:CGSizeMake(size, size) contentMode:PHImageContentModeAspectFill options:options];
          }
+        
          if (completion)
          {
              dispatch_async(dispatch_get_main_queue(), ^{completion(self.allPictures);});

@@ -2,8 +2,8 @@
 //  UIButton+BackgroundColor.m
 //  bclient
 //
-//  Created by ayibang on 16/4/6.
-//  Copyright © 2016年 ayibang. All rights reserved.
+//  Created by 季成 on 16/4/6.
+//  Copyright © 2016年 季成. All rights reserved.
 //
 
 #import "UIButton+BackgroundColor.h"

@@ -2,13 +2,33 @@
 //  UIImage+Orientation.m
 //  yuantu
 //
-//  Created by ayibang on 16/7/19.
+//  Created by 季成 on 16/7/19.
 //  Copyright © 2016年 jicheng. All rights reserved.
 //
 
 #import "UIImage+Orientation.h"
 
 @implementation UIImage (Orientation)
+
+- (UIImage *)thumbnailImage
+{
+    CGSize size = CGSizeMake(self.size.width, self.size.height);
+    if (size.width > size.height)
+    {
+        size.height = ceil(size.height / size.width * 100);
+        size.width = 100;
+    }
+    else
+    {
+        size.width = ceil(size.width / size.height * 100);
+        size.height = 100;
+    }
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 - (UIImage *)fixedOrientationImage
 {

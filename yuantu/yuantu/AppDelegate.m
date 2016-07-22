@@ -30,6 +30,11 @@
         return YES;
     }
     
+    if ([QQApiInterface handleOpenURL:url delegate:[QQApiManager sharedManager]])
+    {
+        return YES;
+    }
+    
     return NO;
 }
 
@@ -40,6 +45,11 @@
     }
     
     if ([TencentOAuth HandleOpenURL:url])
+    {
+        return YES;
+    }
+    
+    if ([QQApiInterface handleOpenURL:url delegate:[QQApiManager sharedManager]])
     {
         return YES;
     }
@@ -55,6 +65,7 @@
     [self.window makeKeyAndVisible];
 
     [[WXApiManager sharedManager] registerApp];
+    [[QQApiManager sharedManager] registerApp];
     
     return YES;
 }

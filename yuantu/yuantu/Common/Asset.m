@@ -7,17 +7,17 @@
 //
 
 #import "Asset.h"
+#import "PictureManager.h"
 
 @interface Asset()
 
 @property (nonatomic,strong,readwrite) PHAsset *asset;
-@property (nonatomic,readwrite) BOOL isOriginal;
 
 @end
 
 @implementation Asset
 {
-    BOOL _hasReadMetadata;
+    NSMutableArray *_resultHandlers;
 }
 
 - (id)initWithAsset:(PHAsset *)asset
@@ -26,20 +26,59 @@
     if (self)
     {
         self.asset = asset;
-        _hasReadMetadata = NO;
-        self.isOriginal = YES;
+        _resultHandlers = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (BOOL)isOriginal
 {
-    if (!_hasReadMetadata)
+    if (!self.isOriginalNumber)
     {
-        self.isOriginal = [self isPureImageWithAsset:self.asset];
-        _hasReadMetadata = YES;
+        self.isOriginalNumber = @([self isPureImageWithAsset:self.asset]);
     }
-    return _isOriginal;
+    return self.isOriginalNumber.boolValue;
+}
+
+- (void)requestIsOriginalWithResultHandler:(void(^)(BOOL isOriginal))resultHandler
+{
+    if (self.isOriginalNumber)
+    {
+        if (resultHandler)
+        {
+            resultHandler(self.isOriginalNumber.boolValue);
+        }
+        return;
+    }
+    
+    if (_resultHandlers.count > 0)
+    {
+        [_resultHandlers addObject:resultHandler];
+        return;
+    }
+    
+    [_resultHandlers addObject:resultHandler];
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
+     {
+         dispatch_async(dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^
+                        {
+                            NSDictionary *metadataDic = [self metadataFromImageData:imageData];
+                            BOOL isOriginal = [self isPureImage:metadataDic];
+                            dispatch_async(dispatch_get_main_queue(), ^
+                                           {
+                                               self.isOriginalNumber = @(isOriginal);
+                                               for (void(^handler)(BOOL) in _resultHandlers)
+                                               {
+                                                   if (handler)
+                                                   {
+                                                       handler(isOriginal);
+                                                   }
+                                               }
+                                               [_resultHandlers removeAllObjects];
+                                           });
+                        });
+     }];
 }
 
 - (BOOL)isPureImageWithAsset:(PHAsset *)asset
@@ -85,14 +124,28 @@
 
 - (NSData *)imageData
 {
+//    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+//    options.synchronous = YES;
+//    __block NSData *data = nil;
+//    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
+//     {
+//         data = imageData;
+//     }];
+//    return data;
+    
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.synchronous = YES;
-    __block NSData *data = nil;
-    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
+    options.version = PHImageRequestOptionsVersionOriginal;
+    __block UIImage *image = nil;
+    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
      {
-         data = imageData;
+         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
+         if (downloadFinined)
+         {
+             image = result;
+         }
      }];
-    return data;
+    return UIImagePNGRepresentation(image);
 }
 
 - (UIImage *)thumbnailImage
@@ -100,7 +153,18 @@
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.synchronous = YES;
     options.version = PHImageRequestOptionsVersionOriginal;
-    CGSize size = CGSizeMake(100, 100);
+    CGSize size = CGSizeMake(self.asset.pixelWidth, self.asset.pixelHeight);
+    CGFloat scale = [UIScreen mainScreen].scale;
+    if (size.width > size.height)
+    {
+        size.height = ceil(size.height / size.width * 100 * scale);
+        size.width = 100 * scale;
+    }
+    else
+    {
+        size.width = ceil(size.width / size.height * 100 * scale);
+        size.height = 100 * scale;
+    }
     __block UIImage *image = nil;
     [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
     {
@@ -120,7 +184,7 @@
     CGSize size;
     size.width = targetSize.width * [UIScreen mainScreen].scale;
     size.height = targetSize.height * [UIScreen mainScreen].scale;
-    PHImageRequestID requestId = [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:resultHandler];
+    PHImageRequestID requestId = [[PictureManager sharedManager].imageManager requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:resultHandler];
     return requestId;
 }
 

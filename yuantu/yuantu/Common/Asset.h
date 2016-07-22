@@ -14,10 +14,13 @@
 @property (nonatomic,strong,readonly) PHAsset *asset;
 @property (nonatomic,readonly) BOOL isOriginal;
 
+@property (nonatomic,strong) NSNumber *isOriginalNumber;
+
 - (id)initWithAsset:(PHAsset *)asset;
 
 - (PHImageRequestID)requestImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
 - (PHImageRequestID)requestLargeImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
+- (void)requestIsOriginalWithResultHandler:(void(^)(BOOL isOriginal))resultHandler;
 
 - (UIImage *)thumbnailImage;
 - (NSData *)imageData;

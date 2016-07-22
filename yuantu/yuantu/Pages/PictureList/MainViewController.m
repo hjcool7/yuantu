@@ -11,6 +11,7 @@
 #import "AlbumViewController.h"
 #import "UIImage+Orientation.h"
 #import "SharePictureViewController.h"
+#import "LoadingView.h"
 
 @interface MainViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -52,9 +53,12 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{    
+{
+    LoadingView *loadingView = [LoadingView modalLoadingView];
+    [loadingView showInView:self.view];
     [picker dismissViewControllerAnimated:YES completion:^
      {
+         [loadingView dismiss];
          SharePictureViewController *sharePictureViewController = [[SharePictureViewController alloc] initWithMediaInfo:info];
          [self.navigationController pushViewController:sharePictureViewController animated:YES];
      }];

@@ -2,13 +2,14 @@
 //  WXApiManager.m
 //  yuantu
 //
-//  Created by ayibang on 16/7/21.
+//  Created by 季成 on 16/7/21.
 //  Copyright © 2016年 jicheng. All rights reserved.
 //
 
 #import "WXApiManager.h"
 #import "Asset.h"
 #import "UIImage+Orientation.h"
+#import "Toast.h"
 
 @implementation WXApiManager
 
@@ -51,7 +52,8 @@
 {
     WXMediaMessage *mediaMessage = [WXMediaMessage message];
     UIImage *image = [[mediaInfo objectForKey:UIImagePickerControllerOriginalImage] fixedOrientationImage];
-    [mediaMessage setThumbImage:image];
+    UIImage *thumbImage = [image thumbnailImage];
+    [mediaMessage setThumbImage:thumbImage];
     WXImageObject *imageObject = [WXImageObject object];
     imageObject.imageData = UIImagePNGRepresentation(image);
     mediaMessage.mediaObject = imageObject;
@@ -63,54 +65,24 @@
     [WXApi sendReq:req];
 }
 
-- (void)onResp:(BaseResp *)resp {
-//    if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
-//        if (_delegate
-//            && [_delegate respondsToSelector:@selector(managerDidRecvMessageResponse:)]) {
-//            SendMessageToWXResp *messageResp = (SendMessageToWXResp *)resp;
-//            [_delegate managerDidRecvMessageResponse:messageResp];
-//        }
-//    } else if ([resp isKindOfClass:[SendAuthResp class]]) {
-//        if (_delegate
-//            && [_delegate respondsToSelector:@selector(managerDidRecvAuthResponse:)]) {
-//            SendAuthResp *authResp = (SendAuthResp *)resp;
-//            [_delegate managerDidRecvAuthResponse:authResp];
-//        }
-//    } else if ([resp isKindOfClass:[AddCardToWXCardPackageResp class]]) {
-//        if (_delegate
-//            && [_delegate respondsToSelector:@selector(managerDidRecvAddCardResponse:)]) {
-//            AddCardToWXCardPackageResp *addCardResp = (AddCardToWXCardPackageResp *)resp;
-//            [_delegate managerDidRecvAddCardResponse:addCardResp];
-//        }
-//    } else if ([resp isKindOfClass:[WXChooseCardResp class]]) {
-//        if (_delegate
-//            && [_delegate respondsToSelector:@selector(managerDidRecvChooseCardResponse:)]) {
-//            WXChooseCardResp *chooseCardResp = (WXChooseCardResp *)resp;
-//            [_delegate managerDidRecvChooseCardResponse:chooseCardResp];
-//        }
-//    }
+- (void)onResp:(BaseResp *)resp
+{
+    if ([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        if (resp.errCode == 0)
+        {
+            [Toast showToastWithText:@"分享成功"];
+        }
+        else
+        {
+            [Toast showToastWithText:resp.errStr ? : @""];
+        }
+    }
 }
 
-- (void)onReq:(BaseReq *)req {
-//    if ([req isKindOfClass:[GetMessageFromWXReq class]]) {
-//        if (_delegate
-//            && [_delegate respondsToSelector:@selector(managerDidRecvGetMessageReq:)]) {
-//            GetMessageFromWXReq *getMessageReq = (GetMessageFromWXReq *)req;
-//            [_delegate managerDidRecvGetMessageReq:getMessageReq];
-//        }
-//    } else if ([req isKindOfClass:[ShowMessageFromWXReq class]]) {
-//        if (_delegate
-//            && [_delegate respondsToSelector:@selector(managerDidRecvShowMessageReq:)]) {
-//            ShowMessageFromWXReq *showMessageReq = (ShowMessageFromWXReq *)req;
-//            [_delegate managerDidRecvShowMessageReq:showMessageReq];
-//        }
-//    } else if ([req isKindOfClass:[LaunchFromWXReq class]]) {
-//        if (_delegate
-//            && [_delegate respondsToSelector:@selector(managerDidRecvLaunchFromWXReq:)]) {
-//            LaunchFromWXReq *launchReq = (LaunchFromWXReq *)req;
-//            [_delegate managerDidRecvLaunchFromWXReq:launchReq];
-//        }
-//    }
+- (void)onReq:(BaseReq *)req
+{
+
 }
 
 @end

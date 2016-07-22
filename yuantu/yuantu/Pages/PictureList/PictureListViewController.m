@@ -50,7 +50,10 @@
     [_collectionView reloadData];
     if (self.pictures.count > 0)
     {
-        [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.pictures.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+        dispatch_async(dispatch_get_main_queue(), ^
+                       {
+                                   [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.pictures.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+                       });
     }
 }
 

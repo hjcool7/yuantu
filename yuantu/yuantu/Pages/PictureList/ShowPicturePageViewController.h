@@ -2,7 +2,7 @@
 //  ShowPicturePageViewController.h
 //  yuantu
 //
-//  Created by ayibang on 16/7/18.
+//  Created by 季成 on 16/7/18.
 //  Copyright © 2016年 jicheng. All rights reserved.
 //
 

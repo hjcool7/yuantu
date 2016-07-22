@@ -2,7 +2,7 @@
 //  WXApiManager.h
 //  yuantu
 //
-//  Created by ayibang on 16/7/21.
+//  Created by 季成 on 16/7/21.
 //  Copyright © 2016年 jicheng. All rights reserved.
 //
 

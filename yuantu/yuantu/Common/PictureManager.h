@@ -18,6 +18,7 @@ extern NSString *const PictureManagerChangeNotification;
 
 @property (nonatomic,copy,readonly) NSArray<Asset *> *allPictures;
 @property (nonatomic,copy,readonly) NSArray<AssetCollection *> *allAlbums;
+@property (nonatomic,strong,readonly) PHCachingImageManager *imageManager;
 
 + (instancetype)sharedManager;
 

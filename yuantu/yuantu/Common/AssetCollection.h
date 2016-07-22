@@ -16,7 +16,6 @@
 @property (nonatomic,strong,readonly) PHAssetCollection *assetCollection;
 @property (nonatomic,copy,readonly) NSString *title;
 @property (nonatomic,readonly) NSInteger count;
-@property (nonatomic,readonly) NSInteger originalPictureCount;
 @property (nonatomic,copy,readonly) NSArray<Asset *> *assets;
 
 - (id)initWithAssetCollection:(PHAssetCollection *)assetCollection;

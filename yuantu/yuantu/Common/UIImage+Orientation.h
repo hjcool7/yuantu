@@ -2,7 +2,7 @@
 //  UIImage+Orientation.h
 //  yuantu
 //
-//  Created by ayibang on 16/7/19.
+//  Created by 季成 on 16/7/19.
 //  Copyright © 2016年 jicheng. All rights reserved.
 //
 
@@ -11,5 +11,6 @@
 @interface UIImage (Orientation)
 
 - (UIImage *)fixedOrientationImage;
+- (UIImage *)thumbnailImage;
 
 @end

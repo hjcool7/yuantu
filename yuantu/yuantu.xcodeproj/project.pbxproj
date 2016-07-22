@@ -50,6 +50,7 @@
 		383299D51D40C1230057EFEA /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 383299D41D40C1230057EFEA /* libstdc++.tbd */; };
 		383299D81D40C2620057EFEA /* QQApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 383299D71D40C2620057EFEA /* QQApiManager.m */; };
 		383299D91D40C5D40057EFEA /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383299CA1D40C0DF0057EFEA /* TencentOpenAPI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		383299E21D41F7550057EFEA /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 383299E11D41F7550057EFEA /* LoadingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,8 @@
 		383299D41D40C1230057EFEA /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		383299D61D40C2620057EFEA /* QQApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQApiManager.h; sourceTree = "<group>"; };
 		383299D71D40C2620057EFEA /* QQApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQApiManager.m; sourceTree = "<group>"; };
+		383299E01D41F7550057EFEA /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		383299E11D41F7550057EFEA /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +302,8 @@
 				383299C51D40B3120057EFEA /* WXApiManager.m */,
 				383299D61D40C2620057EFEA /* QQApiManager.h */,
 				383299D71D40C2620057EFEA /* QQApiManager.m */,
+				383299E01D41F7550057EFEA /* LoadingView.h */,
+				383299E11D41F7550057EFEA /* LoadingView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -513,6 +518,7 @@
 				383299A91D3CCE0D0057EFEA /* UIColor+Image.m in Sources */,
 				3832999A1D3CC5E50057EFEA /* ShowPictureViewController.m in Sources */,
 				383299941D38E7920057EFEA /* AlbumTableViewCell.m in Sources */,
+				383299E21D41F7550057EFEA /* LoadingView.m in Sources */,
 				3832995F1D373A600057EFEA /* BaseViewController.m in Sources */,
 				383299B21D3E1D850057EFEA /* UIImage+Orientation.m in Sources */,
 				383299971D38F1BC0057EFEA /* AlbumPictureListViewController.m in Sources */,
@@ -607,7 +613,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8a2bf49c-01e4-469c-aec7-62e6f510140e";
+				PROVISIONING_PROFILE = "ce46a074-460f-4c04-9652-995c30af6513";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -646,7 +652,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "8a2bf49c-01e4-469c-aec7-62e6f510140e";
+				PROVISIONING_PROFILE = "ce46a074-460f-4c04-9652-995c30af6513";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -670,7 +676,7 @@
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caitou.yuantu;
 				PRODUCT_NAME = yuantu;
-				PROVISIONING_PROFILE = "8a2bf49c-01e4-469c-aec7-62e6f510140e";
+				PROVISIONING_PROFILE = "ce46a074-460f-4c04-9652-995c30af6513";
 			};
 			name = Debug;
 		};
@@ -692,7 +698,7 @@
 				OTHER_LDFLAGS = "-fobjc-arc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caitou.yuantu;
 				PRODUCT_NAME = yuantu;
-				PROVISIONING_PROFILE = "8a2bf49c-01e4-469c-aec7-62e6f510140e";
+				PROVISIONING_PROFILE = "ce46a074-460f-4c04-9652-995c30af6513";
 			};
 			name = Release;
 		};

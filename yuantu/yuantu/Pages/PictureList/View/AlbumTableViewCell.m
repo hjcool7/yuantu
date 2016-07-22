@@ -10,6 +10,7 @@
 #import "UIView+AutoLayout.h"
 #import "AssetCollection.h"
 #import "Asset.h"
+#import "UIColor+Hex.h"
 
 NSString *const kAlbumTableViewCellReuseId = @"kAlbumTableViewCellReuseId";
 
@@ -110,7 +111,7 @@ NSString *const kAlbumTableViewCellReuseId = @"kAlbumTableViewCellReuseId";
     [super setHighlighted:highlighted animated:animated];
     if (highlighted)
     {
-        self.contentView.backgroundColor = [UIColor lightGrayColor];
+        self.contentView.backgroundColor = [UIColor hex_colorWithARGBHex:0xFFe3e3e3];
     }
     else
     {

@@ -14,7 +14,6 @@
 @property (nonatomic,strong,readwrite) PHAssetCollection *assetCollection;
 @property (nonatomic,copy,readwrite) NSString *title;
 @property (nonatomic,readwrite) NSInteger count;
-@property (nonatomic,readwrite) NSInteger originalPictureCount;
 @property (nonatomic,copy,readwrite) NSArray<Asset *> *assets;
 
 @end
@@ -30,10 +29,9 @@
         self.title = assetCollection.localizedTitle;
         
         PHFetchOptions *options = [[PHFetchOptions alloc] init];
-        options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+        options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"modificationDate" ascending:YES]];
         PHFetchResult *result = [PHAsset fetchAssetsInAssetCollection:assetCollection options:options];
         NSMutableArray *assets = [[NSMutableArray alloc] init];
-        NSInteger originalPictureCount = 0;
         for (PHAsset *phAsset in result)
         {
             if (![phAsset isKindOfClass:[PHAsset class]])
@@ -47,14 +45,9 @@
             
             Asset *asset = [[Asset alloc] initWithAsset:phAsset];
             [assets addObject:asset];
-//            if (asset.isOriginal)
-//            {
-//                originalPictureCount++;
-//            }
         }
         self.assets = assets;
         self.count = self.assets.count;
-        self.originalPictureCount = originalPictureCount;
     }
     return self;
 }

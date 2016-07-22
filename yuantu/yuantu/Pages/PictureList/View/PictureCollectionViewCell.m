@@ -62,7 +62,12 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
     [Asset cancelImageRequest:_requestId];
     
     _imageView.hidden = YES;
-    _eyeImageView.hidden = _asset.isOriginal;
+    _eyeImageView.hidden = YES;
+    
+    [_asset requestIsOriginalWithResultHandler:^(BOOL isOriginal)
+    {
+        _eyeImageView.hidden = isOriginal;
+    }];
     
     [_asset requestImageForTargetSize:self.pictureSize resultHandler:^(UIImage *result, NSDictionary *info)
     {
