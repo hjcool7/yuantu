@@ -47,7 +47,7 @@
 - (void)shareWithMediaInfo:(NSDictionary *)mediaInfo
 {
     UIImage *image = [[mediaInfo objectForKey:UIImagePickerControllerOriginalImage] fixedOrientationImage];
-    QQApiImageArrayForQZoneObject *img = [QQApiImageArrayForQZoneObject objectWithimageDataArray:@[UIImagePNGRepresentation(image)] title:@"原图"];
+    QQApiImageArrayForQZoneObject *img = [QQApiImageArrayForQZoneObject objectWithimageDataArray:@[UIImageJPEGRepresentation(image,1)] title:@"原图"];
     SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
     [QQApiInterface SendReqToQZone:req];
 }
@@ -76,7 +76,14 @@
 {
     if ([resp isKindOfClass:[SendMessageToQQResp class]])
     {
-        [Toast showToastWithText:resp.result ? : @""];
+        if ([resp.result integerValue] == 0)
+        {
+            [Toast showToastWithText:@"分享成功"];
+        }
+        else
+        {
+            [Toast showToastWithText:resp.errorDescription ? : @"分享失败"];
+        }
     }
 }
 

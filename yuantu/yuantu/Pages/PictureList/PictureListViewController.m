@@ -52,7 +52,7 @@
     {
         dispatch_async(dispatch_get_main_queue(), ^
                        {
-                                   [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.pictures.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+                           [_collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.pictures.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
                        });
     }
 }

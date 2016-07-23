@@ -20,10 +20,11 @@
 
 - (PHImageRequestID)requestImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
 - (PHImageRequestID)requestLargeImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
-- (void)requestIsOriginalWithResultHandler:(void(^)(BOOL isOriginal))resultHandler;
+- (void)requestIsOriginalWithResultHandler:(void(^)(Asset *asset,BOOL isOriginal))resultHandler;
 
 - (UIImage *)thumbnailImage;
 - (NSData *)imageData;
+- (UIImage *)fullImage;
 
 + (BOOL)isCancelled:(NSDictionary *)info;
 + (void)cancelImageRequest:(PHImageRequestID)requestID;

@@ -40,13 +40,13 @@
     return self.isOriginalNumber.boolValue;
 }
 
-- (void)requestIsOriginalWithResultHandler:(void(^)(BOOL isOriginal))resultHandler
+- (void)requestIsOriginalWithResultHandler:(void(^)(Asset *asset,BOOL isOriginal))resultHandler
 {
     if (self.isOriginalNumber)
     {
         if (resultHandler)
         {
-            resultHandler(self.isOriginalNumber.boolValue);
+            resultHandler(self,self.isOriginalNumber.boolValue);
         }
         return;
     }
@@ -61,6 +61,10 @@
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
      {
+         if ([Asset isCancelled:info])
+         {
+             return;
+         }
          dispatch_async(dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^
                         {
                             NSDictionary *metadataDic = [self metadataFromImageData:imageData];
@@ -68,11 +72,11 @@
                             dispatch_async(dispatch_get_main_queue(), ^
                                            {
                                                self.isOriginalNumber = @(isOriginal);
-                                               for (void(^handler)(BOOL) in _resultHandlers)
+                                               for (void(^handler)(Asset *,BOOL) in _resultHandlers)
                                                {
                                                    if (handler)
                                                    {
-                                                       handler(isOriginal);
+                                                       handler(self,isOriginal);
                                                    }
                                                }
                                                [_resultHandlers removeAllObjects];
@@ -122,17 +126,8 @@
     return metadataDic;
 }
 
-- (NSData *)imageData
+- (UIImage *)fullImage
 {
-//    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-//    options.synchronous = YES;
-//    __block NSData *data = nil;
-//    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
-//     {
-//         data = imageData;
-//     }];
-//    return data;
-    
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.synchronous = YES;
     options.version = PHImageRequestOptionsVersionOriginal;
@@ -145,7 +140,33 @@
              image = result;
          }
      }];
-    return UIImagePNGRepresentation(image);
+    return image;
+}
+
+- (NSData *)imageData
+{
+//    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+//    options.synchronous = YES;
+//    __block NSData *data = nil;
+//    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
+//     {
+//         data = imageData;
+//     }];
+//    return data;
+
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.synchronous = YES;
+    options.version = PHImageRequestOptionsVersionOriginal;
+    __block UIImage *image = nil;
+    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
+     {
+         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
+         if (downloadFinined)
+         {
+             image = result;
+         }
+     }];
+    return UIImageJPEGRepresentation(image,1);
 }
 
 - (UIImage *)thumbnailImage

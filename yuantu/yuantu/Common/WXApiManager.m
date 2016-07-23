@@ -55,7 +55,7 @@
     UIImage *thumbImage = [image thumbnailImage];
     [mediaMessage setThumbImage:thumbImage];
     WXImageObject *imageObject = [WXImageObject object];
-    imageObject.imageData = UIImagePNGRepresentation(image);
+    imageObject.imageData = UIImageJPEGRepresentation(image,1);
     mediaMessage.mediaObject = imageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
@@ -75,7 +75,7 @@
         }
         else
         {
-            [Toast showToastWithText:resp.errStr ? : @""];
+            [Toast showToastWithText:resp.errStr ? : @"分享失败"];
         }
     }
 }

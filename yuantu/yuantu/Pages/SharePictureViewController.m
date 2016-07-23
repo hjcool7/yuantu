@@ -15,6 +15,7 @@
 #import "Toast.h"
 #import "UIImage+Orientation.h"
 #import "QQApiManager.h"
+#import <Social/Social.h>
 
 @interface SharePictureViewController ()
 
@@ -235,7 +236,11 @@
 
 - (void)weiboButtonClicked:(id)sender
 {
+    SLComposeViewController *cc = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
     
+    [cc addImage:[self.asset fullImage]];
+    
+    [self presentViewController:cc animated:YES completion:nil];
 }
 
 - (void)qzoneButtonClicked:(id)sender
