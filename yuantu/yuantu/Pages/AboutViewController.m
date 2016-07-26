@@ -51,10 +51,20 @@
     qqLabel.backgroundColor = [UIColor clearColor];
     qqLabel.textColor = [UIColor hex_colorWithARGBHex:0xFF5b5b5b];
     qqLabel.font = [UIFont systemFontOfSize:14];
-    qqLabel.text = @"客服QQ：1234233";
+    qqLabel.text = @"客服QQ：943787326";
     [self.view addSubview:qqLabel];
     [qqLabel setAlignParentCenterX];
     [qqLabel setVerticalSpaceConstraint:12 topView:versionLabel];
+    
+    UILabel *telLabel = [[UILabel alloc] init];
+    telLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    telLabel.backgroundColor = [UIColor clearColor];
+    telLabel.textColor = [UIColor hex_colorWithARGBHex:0xFF5b5b5b];
+    telLabel.font = [UIFont systemFontOfSize:14];
+    telLabel.text = @"合作电话：010-52430517";
+    [self.view addSubview:telLabel];
+    [telLabel setAlignParentCenterX];
+    [telLabel setVerticalSpaceConstraint:12 topView:qqLabel];
     
     UIButton *scoreButton = [UIButton buttonWithType:UIButtonTypeSystem];
     scoreButton.translatesAutoresizingMaskIntoConstraints = NO;

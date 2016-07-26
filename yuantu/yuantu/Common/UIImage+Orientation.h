@@ -12,5 +12,7 @@
 
 - (UIImage *)fixedOrientationImage;
 - (UIImage *)thumbnailImage;
+- (UIImage *)grayscaleImage;
+- (void)grayscaleImageWithResultHandler:(void(^)(UIImage *original,UIImage *gray))resultHandler;
 
 @end

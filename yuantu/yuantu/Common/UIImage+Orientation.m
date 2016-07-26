@@ -7,8 +7,59 @@
 //
 
 #import "UIImage+Orientation.h"
+#import "GPUImagePicture.h"
+#import "GPUImageGrayscaleFilter.h"
 
 @implementation UIImage (Orientation)
+
+- (void)grayscaleImageWithResultHandler:(void(^)(UIImage *original,UIImage *gray))resultHandler
+{
+    dispatch_async(dispatch_get_global_queue(0, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^
+                   {
+                       GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:self];
+                       GPUImageGrayscaleFilter *stillImageFilter = [[GPUImageGrayscaleFilter alloc] init];
+                       
+                       [stillImageSource addTarget:stillImageFilter];
+                       [stillImageFilter useNextFrameForImageCapture];
+                       [stillImageSource processImage];
+                       
+                       UIImage *gray = [stillImageFilter imageFromCurrentFramebuffer];
+                       if (resultHandler)
+                       {
+                           resultHandler(self,gray);
+                       }
+                   });
+}
+
+- (UIImage *) grayscaleImage
+{
+//    CGSize size = self.size;
+//    CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width,
+//                             self.size.height);
+//    // Create a mono/gray color space
+//    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+//    CGContextRef context = CGBitmapContextCreate(nil, size.width,
+//                                                 size.height, 8, 0, colorSpace, kCGImageAlphaNone);
+//    CGColorSpaceRelease(colorSpace);
+//    // Draw the image into the grayscale context
+//    CGContextDrawImage(context, rect, [self CGImage]);
+//    CGImageRef grayscale = CGBitmapContextCreateImage(context);
+//    CGContextRelease(context);
+//    // Recover the image
+//    UIImage *img = [UIImage imageWithCGImage:grayscale];
+//    CFRelease(grayscale);
+//    return img;
+    
+    
+    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:self];
+    GPUImageGrayscaleFilter *stillImageFilter = [[GPUImageGrayscaleFilter alloc] init];
+    
+    [stillImageSource addTarget:stillImageFilter];
+    [stillImageFilter useNextFrameForImageCapture];
+    [stillImageSource processImage];
+    
+    return [stillImageFilter imageFromCurrentFramebuffer];
+}
 
 - (UIImage *)thumbnailImage
 {

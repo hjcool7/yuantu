@@ -72,6 +72,7 @@
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeSystem];
     shareButton.translatesAutoresizingMaskIntoConstraints = NO;
     [shareButton setTitle:@"分享" forState:UIControlStateNormal];
+    [shareButton setTitle:@"这张不是原图哦" forState:UIControlStateDisabled];
     shareButton.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     [shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [shareButton bg_setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];

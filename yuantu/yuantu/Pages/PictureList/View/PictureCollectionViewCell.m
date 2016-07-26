@@ -10,6 +10,7 @@
 #import "UIView+AutoLayout.h"
 #import "PictureManager.h"
 #import "Asset.h"
+#import "UIImage+Orientation.h"
 
 NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCellReuseId";
 
@@ -38,8 +39,9 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
         _eyeImageView.translatesAutoresizingMaskIntoConstraints = NO;
         _eyeImageView.hidden = YES;
         [self.contentView addSubview:_eyeImageView];
-        [_eyeImageView setLeftConstraint:4];
-        [_eyeImageView setTopConstraint:4];
+        [_eyeImageView setAlignParentCenter];
+//        [_eyeImageView setLeftConstraint:4];
+//        [_eyeImageView setTopConstraint:4];
         
         _maskView = [[UIView alloc] init];
         _maskView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -65,12 +67,16 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
     _eyeImageView.hidden = YES;
     
     [_asset requestIsOriginalWithResultHandler:^(Asset *asset, BOOL isOriginal)
-    {
-        if (asset == _asset)
-        {
-            _eyeImageView.hidden = isOriginal;
-        }
-    }];
+     {
+         if (asset == _asset)
+         {
+             _eyeImageView.hidden = isOriginal;
+             if (!_imageView.hidden && !isOriginal)
+             {
+                 _imageView.image = [_imageView.image grayscaleImage];
+             }
+         }
+     }];
     
     [_asset requestImageForTargetSize:self.pictureSize resultHandler:^(UIImage *result, NSDictionary *info)
     {
@@ -81,7 +87,14 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
                    return;
                }
                _imageView.hidden = NO;
-               _imageView.image = result;
+               if (!_eyeImageView.hidden)
+               {
+                   _imageView.image = [result grayscaleImage];
+               }
+               else
+               {
+                   _imageView.image = result;
+               }
            });
     }];
 }
