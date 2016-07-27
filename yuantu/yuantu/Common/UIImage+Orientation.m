@@ -66,13 +66,13 @@
     CGSize size = CGSizeMake(self.size.width, self.size.height);
     if (size.width > size.height)
     {
-        size.height = ceil(size.height / size.width * 100);
-        size.width = 100;
+        size.height = ceil(size.height / size.width * 50);
+        size.width = 50;
     }
     else
     {
-        size.width = ceil(size.width / size.height * 100);
-        size.height = 100;
+        size.width = ceil(size.width / size.height * 50);
+        size.height = 50;
     }
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];

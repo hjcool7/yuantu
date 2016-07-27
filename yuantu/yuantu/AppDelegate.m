@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "WXApiManager.h"
 #import "QQApiManager.h"
+#import "WeiboApiManager.h"
 #import <UMMobClick/MobClick.h>
 
 @interface AppDelegate ()
@@ -36,6 +37,11 @@
         return YES;
     }
     
+    if ([WeiboSDK handleOpenURL:url delegate:[WeiboApiManager sharedManager]])
+    {
+        return YES;
+    }
+    
     return NO;
 }
 
@@ -51,6 +57,11 @@
     }
     
     if ([QQApiInterface handleOpenURL:url delegate:[QQApiManager sharedManager]])
+    {
+        return YES;
+    }
+    
+    if ([WeiboSDK handleOpenURL:url delegate:[WeiboApiManager sharedManager]])
     {
         return YES;
     }
@@ -76,6 +87,7 @@
 
     [[WXApiManager sharedManager] registerApp];
     [[QQApiManager sharedManager] registerApp];
+    [[WeiboApiManager sharedManager] registerApp];
     
     return YES;
 }

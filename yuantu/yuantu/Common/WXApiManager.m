@@ -38,7 +38,7 @@
     WXMediaMessage *mediaMessage = [WXMediaMessage message];
     [mediaMessage setThumbImage:[asset thumbnailImage]];
     WXImageObject *imageObject = [WXImageObject object];
-    imageObject.imageData = [asset imageData];
+    imageObject.imageData = [asset imageDataForWeixin];
     mediaMessage.mediaObject = imageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];

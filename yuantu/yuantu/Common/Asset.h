@@ -24,6 +24,7 @@
 
 - (UIImage *)thumbnailImage;
 - (NSData *)imageData;
+- (NSData *)imageDataForWeixin;
 - (UIImage *)fullImage;
 
 + (BOOL)isCancelled:(NSDictionary *)info;

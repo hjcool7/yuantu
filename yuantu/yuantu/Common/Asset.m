@@ -143,6 +143,23 @@
     return image;
 }
 
+- (NSData *)imageDataForWeixin
+{
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.synchronous = YES;
+    options.version = PHImageRequestOptionsVersionOriginal;
+    __block UIImage *image = nil;
+    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:CGSizeMake(1080, 1920) contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info)
+     {
+         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
+         if (downloadFinined)
+         {
+             image = result;
+         }
+     }];
+    return UIImageJPEGRepresentation(image,1);
+}
+
 - (NSData *)imageData
 {
 //    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
@@ -158,7 +175,7 @@
     options.synchronous = YES;
     options.version = PHImageRequestOptionsVersionOriginal;
     __block UIImage *image = nil;
-    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
+    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info)
      {
          BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
          if (downloadFinined)
@@ -178,13 +195,13 @@
     CGFloat scale = [UIScreen mainScreen].scale;
     if (size.width > size.height)
     {
-        size.height = ceil(size.height / size.width * 100 * scale);
-        size.width = 100 * scale;
+        size.height = ceil(size.height / size.width * 50 * scale);
+        size.width = 50 * scale;
     }
     else
     {
-        size.width = ceil(size.width / size.height * 100 * scale);
-        size.height = 100 * scale;
+        size.width = ceil(size.width / size.height * 50 * scale);
+        size.height = 50 * scale;
     }
     __block UIImage *image = nil;
     [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)

@@ -15,6 +15,7 @@
 #import "Toast.h"
 #import "UIImage+Orientation.h"
 #import "QQApiManager.h"
+#import "WeiboApiManager.h"
 #import <Social/Social.h>
 
 @interface SharePictureViewController ()
@@ -236,11 +237,27 @@
 
 - (void)weiboButtonClicked:(id)sender
 {
-    SLComposeViewController *cc = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+//    SLComposeViewController *cc = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+//    
+//    [cc addImage:[self.asset fullImage]];
+//    
+//    [self presentViewController:cc animated:YES completion:nil];
+
+    if (![[WeiboApiManager sharedManager] canShare])
+    {
+        [Toast showToastWithText:@"请安装微博"];
+        return;
+    }
     
-    [cc addImage:[self.asset fullImage]];
-    
-    [self presentViewController:cc animated:YES completion:nil];
+    if (self.asset)
+    {
+        [[WeiboApiManager sharedManager] shareWithAsset:self.asset];
+    }
+    else if(self.info)
+    {
+        [[WeiboApiManager sharedManager] shareWithMediaInfo:self.info];
+    }
+
 }
 
 - (void)qzoneButtonClicked:(id)sender
