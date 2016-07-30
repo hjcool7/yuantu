@@ -8,6 +8,7 @@
 
 #import "Asset.h"
 #import "PictureManager.h"
+#import "UIImage+Orientation.h"
 
 @interface Asset()
 
@@ -157,7 +158,7 @@
              image = result;
          }
      }];
-    return UIImageJPEGRepresentation(image,1);
+    return UIImageJPEGRepresentation(image.weixinShareImage,1);
 }
 
 - (NSData *)imageData
@@ -191,20 +192,19 @@
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.synchronous = YES;
     options.version = PHImageRequestOptionsVersionOriginal;
-    CGSize size = CGSizeMake(self.asset.pixelWidth, self.asset.pixelHeight);
-    CGFloat scale = [UIScreen mainScreen].scale;
-    if (size.width > size.height)
-    {
-        size.height = ceil(size.height / size.width * 50 * scale);
-        size.width = 50 * scale;
-    }
-    else
-    {
-        size.width = ceil(size.width / size.height * 50 * scale);
-        size.height = 50 * scale;
-    }
+//    CGSize size = CGSizeMake(self.asset.pixelWidth, self.asset.pixelHeight);
+//    if (size.width > size.height)
+//    {
+//        size.height = ceil(size.height / size.width * 90);
+//        size.width = 90;
+//    }
+//    else
+//    {
+//        size.width = ceil(size.width / size.height * 90);
+//        size.height = 90;
+//    }
     __block UIImage *image = nil;
-    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:size contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
+    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:CGSizeMake(1080, 1920) contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
     {
         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
         if (downloadFinined)
@@ -212,7 +212,7 @@
             image = result;
         }
     }];
-    return image;
+    return image.thumbnailImage;
 }
 
 - (PHImageRequestID)requestImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler

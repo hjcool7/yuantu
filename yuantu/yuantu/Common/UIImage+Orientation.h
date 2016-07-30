@@ -12,6 +12,7 @@
 
 - (UIImage *)fixedOrientationImage;
 - (UIImage *)thumbnailImage;
+- (UIImage *)weixinShareImage;
 - (UIImage *)grayscaleImage;
 - (void)grayscaleImageWithResultHandler:(void(^)(UIImage *original,UIImage *gray))resultHandler;
 

@@ -55,7 +55,7 @@
     UIImage *thumbImage = [image thumbnailImage];
     [mediaMessage setThumbImage:thumbImage];
     WXImageObject *imageObject = [WXImageObject object];
-    imageObject.imageData = UIImageJPEGRepresentation(image,1);
+    imageObject.imageData = UIImageJPEGRepresentation(image.weixinShareImage,1);
     mediaMessage.mediaObject = imageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];

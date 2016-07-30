@@ -33,46 +33,68 @@
 
 - (UIImage *) grayscaleImage
 {
-//    CGSize size = self.size;
-//    CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width,
-//                             self.size.height);
-//    // Create a mono/gray color space
-//    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-//    CGContextRef context = CGBitmapContextCreate(nil, size.width,
-//                                                 size.height, 8, 0, colorSpace, kCGImageAlphaNone);
-//    CGColorSpaceRelease(colorSpace);
-//    // Draw the image into the grayscale context
-//    CGContextDrawImage(context, rect, [self CGImage]);
-//    CGImageRef grayscale = CGBitmapContextCreateImage(context);
-//    CGContextRelease(context);
-//    // Recover the image
-//    UIImage *img = [UIImage imageWithCGImage:grayscale];
-//    CFRelease(grayscale);
-//    return img;
+    CGSize size = self.size;
+    CGRect rect = CGRectMake(0.0f, 0.0f, self.size.width,
+                             self.size.height);
+    // Create a mono/gray color space
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+    CGContextRef context = CGBitmapContextCreate(nil, size.width,
+                                                 size.height, 8, 0, colorSpace, kCGImageAlphaNone);
+    CGColorSpaceRelease(colorSpace);
+    // Draw the image into the grayscale context
+    CGContextDrawImage(context, rect, [self CGImage]);
+    CGImageRef grayscale = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    // Recover the image
+    UIImage *img = [UIImage imageWithCGImage:grayscale];
+    CFRelease(grayscale);
+    return img;
     
     
-    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:self];
-    GPUImageGrayscaleFilter *stillImageFilter = [[GPUImageGrayscaleFilter alloc] init];
-    
-    [stillImageSource addTarget:stillImageFilter];
-    [stillImageFilter useNextFrameForImageCapture];
-    [stillImageSource processImage];
-    
-    return [stillImageFilter imageFromCurrentFramebuffer];
+//    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:self];
+//    GPUImageGrayscaleFilter *stillImageFilter = [[GPUImageGrayscaleFilter alloc] init];
+//    
+//    [stillImageSource addTarget:stillImageFilter];
+//    [stillImageFilter useNextFrameForImageCapture];
+//    [stillImageSource processImage];
+//    
+//    return [stillImageFilter imageFromCurrentFramebuffer];
 }
 
 - (UIImage *)thumbnailImage
 {
     CGSize size = CGSizeMake(self.size.width, self.size.height);
+    CGFloat scale = [UIScreen mainScreen].scale;
     if (size.width > size.height)
     {
-        size.height = ceil(size.height / size.width * 50);
-        size.width = 50;
+        size.height = ceil(size.height / size.width * 270 / scale);
+        size.width = 270 / scale;
     }
     else
     {
-        size.width = ceil(size.width / size.height * 50);
-        size.height = 50;
+        size.width = ceil(size.width / size.height * 270 / scale);
+        size.height = 270 / scale;
+    }
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (UIImage *)weixinShareImage
+{
+    CGSize size = CGSizeMake(self.size.width, self.size.height);
+    CGFloat scale = [UIScreen mainScreen].scale;
+    if (size.width > size.height)
+    {
+        size.height = ceil(size.height / size.width * 1080 / scale);
+        size.width = 1080 / scale;
+    }
+    else
+    {
+        size.width = ceil(size.width / size.height * 1920 / scale);
+        size.height = 1920 / scale;
     }
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
