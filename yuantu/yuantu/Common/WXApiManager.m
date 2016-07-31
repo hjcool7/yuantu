@@ -33,12 +33,12 @@
     return ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]);
 }
 
-- (void)shareWithAsset:(Asset *)asset scene:(int)scene
+- (void)shareWithImage:(UIImage *)fullImage scene:(int)scene
 {
     WXMediaMessage *mediaMessage = [WXMediaMessage message];
-    [mediaMessage setThumbImage:[asset thumbnailImage]];
+    [mediaMessage setThumbImage:fullImage.thumbnailImage];
     WXImageObject *imageObject = [WXImageObject object];
-    imageObject.imageData = [asset imageDataForWeixin];
+    imageObject.imageData = fullImage.shareImage.imageData;
     mediaMessage.mediaObject = imageObject;
     
     SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
@@ -48,21 +48,16 @@
     [WXApi sendReq:req];
 }
 
+- (void)shareWithAsset:(Asset *)asset scene:(int)scene
+{
+    UIImage *fullImage = [asset fullImage];
+    [self shareWithImage:fullImage scene:scene];
+}
+
 - (void)shareWithMediaInfo:(NSDictionary *)mediaInfo scene:(int)scene
 {
-    WXMediaMessage *mediaMessage = [WXMediaMessage message];
     UIImage *image = [[mediaInfo objectForKey:UIImagePickerControllerOriginalImage] fixedOrientationImage];
-    UIImage *thumbImage = [image thumbnailImage];
-    [mediaMessage setThumbImage:thumbImage];
-    WXImageObject *imageObject = [WXImageObject object];
-    imageObject.imageData = UIImageJPEGRepresentation(image.weixinShareImage,1);
-    mediaMessage.mediaObject = imageObject;
-    
-    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-    req.bText = NO;
-    req.message = mediaMessage;
-    req.scene = scene;
-    [WXApi sendReq:req];
+    [self shareWithImage:image scene:scene];
 }
 
 - (void)onResp:(BaseResp *)resp

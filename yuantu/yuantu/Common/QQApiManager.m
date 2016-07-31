@@ -38,18 +38,21 @@
     return ([QQApiInterface isQQSupportApi] && [QQApiInterface isQQInstalled]);
 }
 
-- (void)shareWithAsset:(Asset *)asset
+- (void)shareWithImage:(UIImage *)image
 {
-    QQApiImageArrayForQZoneObject *img = [QQApiImageArrayForQZoneObject objectWithimageDataArray:@[[asset imageData]] title:@"原图"];
+    QQApiImageArrayForQZoneObject *img = [QQApiImageArrayForQZoneObject objectWithimageDataArray:@[image.shareImage.imageData] title:@"原图"];
     SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
     [QQApiInterface SendReqToQZone:req];
+}
+
+- (void)shareWithAsset:(Asset *)asset
+{
+    [self shareWithImage:asset.fullImage];
 }
 - (void)shareWithMediaInfo:(NSDictionary *)mediaInfo
 {
     UIImage *image = [[mediaInfo objectForKey:UIImagePickerControllerOriginalImage] fixedOrientationImage];
-    QQApiImageArrayForQZoneObject *img = [QQApiImageArrayForQZoneObject objectWithimageDataArray:@[UIImageJPEGRepresentation(image,1)] title:@"原图"];
-    SendMessageToQQReq* req = [SendMessageToQQReq reqWithContent:img];
-    [QQApiInterface SendReqToQZone:req];
+    [self shareWithImage:image];
 }
 
 - (void)tencentDidLogin

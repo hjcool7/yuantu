@@ -12,6 +12,7 @@
 #import "WXApiManager.h"
 #import "QQApiManager.h"
 #import "WeiboApiManager.h"
+#import "AppInfoManager.h"
 #import <UMMobClick/MobClick.h>
 
 @interface AppDelegate ()
@@ -77,7 +78,7 @@
 #else
     UMConfigInstance.channelId = @"App Store";
 #endif
-    [MobClick setAppVersion:@"1.0"];
+    [MobClick setAppVersion:[AppInfoManager sharedManager].version];
     [MobClick startWithConfigure:UMConfigInstance];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

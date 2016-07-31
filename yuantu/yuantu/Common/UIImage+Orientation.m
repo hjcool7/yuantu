@@ -9,6 +9,8 @@
 #import "UIImage+Orientation.h"
 #import "GPUImagePicture.h"
 #import "GPUImageGrayscaleFilter.h"
+#import "QRCodeUtil.h"
+#import "AppInfoManager.h"
 
 @implementation UIImage (Orientation)
 
@@ -82,10 +84,11 @@
     return newImage;
 }
 
-- (UIImage *)weixinShareImage
+- (UIImage *)shareImage
 {
     CGSize size = CGSizeMake(self.size.width, self.size.height);
-    CGFloat scale = [UIScreen mainScreen].scale;
+//    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat scale = 1;
     if (size.width > size.height)
     {
         size.height = ceil(size.height / size.width * 1080 / scale);
@@ -96,11 +99,22 @@
         size.width = ceil(size.width / size.height * 1920 / scale);
         size.height = 1920 / scale;
     }
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    
+    UIImage *qrCodeImage = [QRCodeUtil qrCodeImageWithString:[AppInfoManager sharedManager].appStoreUrl size:174];
+    UIImage *iconImage = [UIImage imageNamed:@"ShareIcon"];
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, scale);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    [iconImage drawInRect:CGRectMake(30, size.height - 30 - iconImage.size.height, iconImage.size.width, iconImage.size.height)];
+    [qrCodeImage drawInRect:CGRectMake(30, size.height - 30 - iconImage.size.height - 10 - 174, 174, 174)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
+- (NSData *)imageData
+{
+    return UIImageJPEGRepresentation(self,1);
 }
 
 - (UIImage *)fixedOrientationImage

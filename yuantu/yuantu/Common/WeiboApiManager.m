@@ -33,26 +33,11 @@
     return ([WeiboSDK isCanShareInWeiboAPP] && [WeiboSDK isWeiboAppInstalled]);
 }
 
-- (void)shareWithAsset:(Asset *)asset
+- (void)shareWithImage:(UIImage *)image
 {
-    WBMessageObject *message = [WBMessageObject message];
-    WBImageObject *image = [WBImageObject object];
-    image.imageData = [asset imageData];
-    message.imageObject = image;
-    
-    WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
-    authRequest.redirectURI = @"https://api.weibo.com/oauth2/default.html";
-    
-    WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
-    [WeiboSDK sendRequest:request];
-}
-- (void)shareWithMediaInfo:(NSDictionary *)mediaInfo
-{
-    UIImage *image = [[mediaInfo objectForKey:UIImagePickerControllerOriginalImage] fixedOrientationImage];
-    
     WBMessageObject *message = [WBMessageObject message];
     WBImageObject *imageObject = [WBImageObject object];
-    imageObject.imageData = UIImageJPEGRepresentation(image,1);;
+    imageObject.imageData = image.shareImage.imageData;
     message.imageObject = imageObject;
     
     WBAuthorizeRequest *authRequest = [WBAuthorizeRequest request];
@@ -60,6 +45,16 @@
     
     WBSendMessageToWeiboRequest *request = [WBSendMessageToWeiboRequest requestWithMessage:message authInfo:authRequest access_token:nil];
     [WeiboSDK sendRequest:request];
+}
+
+- (void)shareWithAsset:(Asset *)asset
+{
+    [self shareWithImage:asset.fullImage];
+}
+- (void)shareWithMediaInfo:(NSDictionary *)mediaInfo
+{
+    UIImage *image = [[mediaInfo objectForKey:UIImagePickerControllerOriginalImage] fixedOrientationImage];
+    [self shareWithImage:image];
 }
 
 - (void)didReceiveWeiboRequest:(WBBaseRequest *)request

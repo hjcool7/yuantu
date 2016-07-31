@@ -237,6 +237,8 @@
 		38EADFB81D489DDB0026FF2E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EADFB71D489DDB0026FF2E /* CoreText.framework */; };
 		38EADFBA1D489DE40026FF2E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EADFB91D489DE40026FF2E /* UIKit.framework */; };
 		38EADFBC1D489DEA0026FF2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EADFBB1D489DEA0026FF2E /* Foundation.framework */; };
+		38EADFBF1D4D97250026FF2E /* AppInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EADFBE1D4D97250026FF2E /* AppInfoManager.m */; };
+		38EADFC21D4DDBFD0026FF2E /* QRCodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EADFC11D4DDBFD0026FF2E /* QRCodeUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -709,6 +711,10 @@
 		38EADFB71D489DDB0026FF2E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		38EADFB91D489DE40026FF2E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		38EADFBB1D489DEA0026FF2E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		38EADFBD1D4D97250026FF2E /* AppInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoManager.h; sourceTree = "<group>"; };
+		38EADFBE1D4D97250026FF2E /* AppInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInfoManager.m; sourceTree = "<group>"; };
+		38EADFC01D4DDBFD0026FF2E /* QRCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeUtil.h; sourceTree = "<group>"; };
+		38EADFC11D4DDBFD0026FF2E /* QRCodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -883,6 +889,10 @@
 				383299E11D41F7550057EFEA /* LoadingView.m */,
 				38EADFB21D48983B0026FF2E /* WeiboApiManager.h */,
 				38EADFB31D48983B0026FF2E /* WeiboApiManager.m */,
+				38EADFBD1D4D97250026FF2E /* AppInfoManager.h */,
+				38EADFBE1D4D97250026FF2E /* AppInfoManager.m */,
+				38EADFC01D4DDBFD0026FF2E /* QRCodeUtil.h */,
+				38EADFC11D4DDBFD0026FF2E /* QRCodeUtil.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1578,6 +1588,7 @@
 				38EADF531D47143E0026FF2E /* GPUImageMotionBlurFilter.m in Sources */,
 				38EADF521D47143E0026FF2E /* GPUImageMosaicFilter.m in Sources */,
 				38EADF661D47143E0026FF2E /* GPUImagePolkaDotFilter.m in Sources */,
+				38EADFC21D4DDBFD0026FF2E /* QRCodeUtil.m in Sources */,
 				38EADF621D47143E0026FF2E /* GPUImagePixellateFilter.m in Sources */,
 				383299A01D3CCDAF0057EFEA /* Toast.m in Sources */,
 				38EADF0E1D47143E0026FF2E /* GPUImageColorMatrixFilter.m in Sources */,
@@ -1675,6 +1686,7 @@
 				383299881D376D600057EFEA /* PictureViewController.m in Sources */,
 				38EADF8E1D47143E0026FF2E /* GPUImageTransformFilter.m in Sources */,
 				38EADEFC1D47143E0026FF2E /* GPUImageAverageColor.m in Sources */,
+				38EADFBF1D4D97250026FF2E /* AppInfoManager.m in Sources */,
 				38EADF7D1D47143E0026FF2E /* GPUImageSolarizeFilter.m in Sources */,
 				38EADF931D47143E0026FF2E /* GPUImageUIElement.m in Sources */,
 				38EADF381D47143E0026FF2E /* GPUImageHistogramGenerator.m in Sources */,

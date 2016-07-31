@@ -106,11 +106,6 @@ NSString *const PictureManagerChangeNotification = @"PictureManagerChangeNotific
                     [array insertObject:phAsset atIndex:0];
                     [assets addObject:[[Asset alloc] initWithAsset:phAsset]];
                 }
-                [assets addObjectsFromArray:assets];
-                [assets addObjectsFromArray:assets];
-                [assets addObjectsFromArray:assets];
-                [assets addObjectsFromArray:assets];
-                [assets addObjectsFromArray:assets];
                 self.allPictures = assets;
             });
              

@@ -144,76 +144,76 @@
     return image;
 }
 
-- (NSData *)imageDataForWeixin
-{
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.synchronous = YES;
-    options.version = PHImageRequestOptionsVersionOriginal;
-    __block UIImage *image = nil;
-    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:CGSizeMake(1080, 1920) contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info)
-     {
-         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
-         if (downloadFinined)
-         {
-             image = result;
-         }
-     }];
-    return UIImageJPEGRepresentation(image.weixinShareImage,1);
-}
-
-- (NSData *)imageData
-{
+//- (NSData *)imageDataForWeixin
+//{
 //    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
 //    options.synchronous = YES;
-//    __block NSData *data = nil;
-//    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
+//    options.version = PHImageRequestOptionsVersionOriginal;
+//    __block UIImage *image = nil;
+//    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:CGSizeMake(1080, 1920) contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info)
 //     {
-//         data = imageData;
+//         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
+//         if (downloadFinined)
+//         {
+//             image = result;
+//         }
 //     }];
-//    return data;
-
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.synchronous = YES;
-    options.version = PHImageRequestOptionsVersionOriginal;
-    __block UIImage *image = nil;
-    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info)
-     {
-         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
-         if (downloadFinined)
-         {
-             image = result;
-         }
-     }];
-    return UIImageJPEGRepresentation(image,1);
-}
-
-- (UIImage *)thumbnailImage
-{
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.synchronous = YES;
-    options.version = PHImageRequestOptionsVersionOriginal;
-//    CGSize size = CGSizeMake(self.asset.pixelWidth, self.asset.pixelHeight);
-//    if (size.width > size.height)
+//    return UIImageJPEGRepresentation(image.weixinShareImage,1);
+//}
+//
+//- (NSData *)imageData
+//{
+////    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+////    options.synchronous = YES;
+////    __block NSData *data = nil;
+////    [[PHImageManager defaultManager] requestImageDataForAsset:self.asset options:options resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info)
+////     {
+////         data = imageData;
+////     }];
+////    return data;
+//
+//    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+//    options.synchronous = YES;
+//    options.version = PHImageRequestOptionsVersionOriginal;
+//    __block UIImage *image = nil;
+//    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info)
+//     {
+//         BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
+//         if (downloadFinined)
+//         {
+//             image = result;
+//         }
+//     }];
+//    return UIImageJPEGRepresentation(image,1);
+//}
+//
+//- (UIImage *)thumbnailImage
+//{
+//    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+//    options.synchronous = YES;
+//    options.version = PHImageRequestOptionsVersionOriginal;
+////    CGSize size = CGSizeMake(self.asset.pixelWidth, self.asset.pixelHeight);
+////    if (size.width > size.height)
+////    {
+////        size.height = ceil(size.height / size.width * 90);
+////        size.width = 90;
+////    }
+////    else
+////    {
+////        size.width = ceil(size.width / size.height * 90);
+////        size.height = 90;
+////    }
+//    __block UIImage *image = nil;
+//    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:CGSizeMake(1080, 1920) contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
 //    {
-//        size.height = ceil(size.height / size.width * 90);
-//        size.width = 90;
-//    }
-//    else
-//    {
-//        size.width = ceil(size.width / size.height * 90);
-//        size.height = 90;
-//    }
-    __block UIImage *image = nil;
-    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:CGSizeMake(1080, 1920) contentMode:PHImageContentModeAspectFill options:options resultHandler:^(UIImage *result, NSDictionary *info)
-    {
-        BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
-        if (downloadFinined)
-        {
-            image = result;
-        }
-    }];
-    return image.thumbnailImage;
-}
+//        BOOL downloadFinined = ![[info objectForKey:PHImageCancelledKey] boolValue] && ![info objectForKey:PHImageErrorKey] && ![[info objectForKey:PHImageResultIsDegradedKey] boolValue];
+//        if (downloadFinined)
+//        {
+//            image = result;
+//        }
+//    }];
+//    return image.thumbnailImage;
+//}
 
 - (PHImageRequestID)requestImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler
 {

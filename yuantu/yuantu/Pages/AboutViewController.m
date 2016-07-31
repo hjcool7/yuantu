@@ -9,6 +9,7 @@
 #import "AboutViewController.h"
 #import "UIView+AutoLayout.h"
 #import "UIColor+Hex.h"
+#import "AppInfoManager.h"
 
 @interface AboutViewController ()
 
@@ -41,7 +42,7 @@
     versionLabel.backgroundColor = [UIColor clearColor];
     versionLabel.textColor = [UIColor hex_colorWithARGBHex:0xFF5b5b5b];
     versionLabel.font = [UIFont systemFontOfSize:14];
-    versionLabel.text = @"当前版本：V1.0";
+    versionLabel.text = [NSString stringWithFormat:@"当前版本：V%@",[AppInfoManager sharedManager].version];
     [self.view addSubview:versionLabel];
     [versionLabel setAlignParentCenterX];
     [versionLabel setVerticalSpaceConstraint:30 topView:sloganLabel];
@@ -83,7 +84,7 @@
 
 - (void)scoreButtonClicked:(id)sender
 {
-    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[AppInfoManager sharedManager].appStoreUrl]];
 }
 
 - (void)didReceiveMemoryWarning {

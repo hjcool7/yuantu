@@ -22,9 +22,11 @@
 - (PHImageRequestID)requestLargeImageForTargetSize:(CGSize)targetSize resultHandler:(void (^)(UIImage *result, NSDictionary *info))resultHandler;
 - (void)requestIsOriginalWithResultHandler:(void(^)(Asset *asset,BOOL isOriginal))resultHandler;
 
-- (UIImage *)thumbnailImage;
-- (NSData *)imageData;
-- (NSData *)imageDataForWeixin;
+//- (UIImage *)thumbnailImage;
+//- (NSData *)imageData;
+//- (NSData *)imageDataForWeixin;
+//- (UIImage *)fullImage;
+
 - (UIImage *)fullImage;
 
 + (BOOL)isCancelled:(NSDictionary *)info;
