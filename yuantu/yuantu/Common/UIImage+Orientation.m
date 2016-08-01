@@ -91,8 +91,8 @@
     CGFloat scale = 1;
     if (size.width > size.height)
     {
-        size.height = ceil(size.height / size.width * 1080 / scale);
-        size.width = 1080 / scale;
+        size.height = ceil(size.height / size.width * 1920 / scale);
+        size.width = 1920 / scale;
     }
     else
     {
