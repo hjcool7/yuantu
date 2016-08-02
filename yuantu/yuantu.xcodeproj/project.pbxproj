@@ -1841,7 +1841,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.caitou.yuantu;
 				PRODUCT_NAME = yuantu;
-				PROVISIONING_PROFILE = "84810441-8805-4c25-a3bc-053e16847495";
+				PROVISIONING_PROFILE = "8b0c6fb4-9f42-4492-afeb-d7ef3832b553";
 			};
 			name = Debug;
 		};
@@ -1868,7 +1868,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.caitou.yuantu;
 				PRODUCT_NAME = yuantu;
-				PROVISIONING_PROFILE = "84810441-8805-4c25-a3bc-053e16847495";
+				PROVISIONING_PROFILE = "8b0c6fb4-9f42-4492-afeb-d7ef3832b553";
 			};
 			name = Release;
 		};

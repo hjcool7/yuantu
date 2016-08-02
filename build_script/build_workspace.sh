@@ -17,19 +17,19 @@ configuration="Debug"
 
 if [[ "$build_type" = "Debug" ]]; then
 	CODE_SIGN_IDENTITY="iPhone Developer: liguang sun (HHVG46TPJ8)"
-	PROVISIONING_PROFILE="84810441-8805-4c25-a3bc-053e16847495"
+	PROVISIONING_PROFILE="8b0c6fb4-9f42-4492-afeb-d7ef3832b553"
 	configuration="Debug"
 fi
 
 if [[ "$build_type" = "Adhoc" ]]; then
-	CODE_SIGN_IDENTITY="iPhone Developer: liguang sun (HHVG46TPJ8)"
-	PROVISIONING_PROFILE="84810441-8805-4c25-a3bc-053e16847495"
+	CODE_SIGN_IDENTITY="iPhone Distribution: liguang sun (7BK3Z2T26B)"
+	PROVISIONING_PROFILE="9b829e82-19e2-4f34-a1ee-019bced68c8b"
 	configuration='Release'
 fi
 
 if [[ "$build_type" = "Appstore" ]]; then
-	CODE_SIGN_IDENTITY="iPhone Developer: liguang sun (HHVG46TPJ8)"
-	PROVISIONING_PROFILE="84810441-8805-4c25-a3bc-053e16847495"
+	CODE_SIGN_IDENTITY="iPhone Distribution: liguang sun (7BK3Z2T26B)"
+	PROVISIONING_PROFILE="912f2820-3cc9-4190-b7a1-4d49e7fb120e"
 	configuration='Release'
 fi
 

@@ -75,7 +75,7 @@
     [shareButton setTitle:@"这张不是原图哦" forState:UIControlStateDisabled];
     shareButton.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     [shareButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [shareButton bg_setBackgroundColor:[UIColor redColor] forState:UIControlStateNormal];
+    [shareButton bg_setBackgroundColor:[UIColor hex_colorWithARGBHex:0xFFff495d] forState:UIControlStateNormal];
     [shareButton bg_setBackgroundColor:[UIColor hex_colorWithARGBHex:0xFFb3b3b3] forState:UIControlStateDisabled];
     shareButton.clipsToBounds = YES;
     shareButton.layer.cornerRadius = 4;

@@ -72,7 +72,7 @@
     [scoreButton setTitle:@"亲，去赞一个吧！" forState:UIControlStateNormal];
     scoreButton.titleLabel.font = [UIFont boldSystemFontOfSize:17];
     [scoreButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    scoreButton.backgroundColor = [UIColor redColor];
+    scoreButton.backgroundColor = [UIColor hex_colorWithARGBHex:0xFFff495d];
     scoreButton.clipsToBounds = YES;
     scoreButton.layer.cornerRadius = 4;
     [scoreButton addTarget:self action:@selector(scoreButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

@@ -71,10 +71,10 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
          if (asset == _asset)
          {
              _eyeImageView.hidden = isOriginal;
-             if (!_imageView.hidden && !isOriginal)
-             {
-                 _imageView.image = [_imageView.image grayscaleImage];
-             }
+//             if (!_imageView.hidden && !isOriginal)
+//             {
+//                 _imageView.image = [_imageView.image grayscaleImage];
+//             }
          }
      }];
     
@@ -87,14 +87,15 @@ NSString * const kPictureCollectionViewCellReuseId = @"kPictureCollectionViewCel
                    return;
                }
                _imageView.hidden = NO;
-               if (!_eyeImageView.hidden)
-               {
-                   _imageView.image = [result grayscaleImage];
-               }
-               else
-               {
-                   _imageView.image = result;
-               }
+               _imageView.image = result;
+//               if (!_eyeImageView.hidden)
+//               {
+//                   _imageView.image = [result grayscaleImage];
+//               }
+//               else
+//               {
+//                   _imageView.image = result;
+//               }
            });
     }];
 }
