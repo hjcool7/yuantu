@@ -93,7 +93,26 @@
 
 - (BOOL)isPureImage:(NSDictionary*)exifDic
 {
-    return ([exifDic valueForKey:@"{MakerApple}"] != nil);
+    if (![exifDic valueForKey:@"{MakerApple}"])
+    {
+        return NO;
+    }
+    
+    NSDictionary *tiffDict = exifDic[@"{TIFF}"];
+    if ([tiffDict isKindOfClass:[NSDictionary class]])
+    {
+        NSString *software = tiffDict[@"Software"];
+        if ([software isKindOfClass:[NSString class]])
+        {
+            if ([software isEqualToString:@"Rookie Cam"] ||
+                [software isEqualToString:@"VSCO"])
+            {
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
 }
 
 - (NSDictionary *)metadataFromImageData:(NSData*)imageData
