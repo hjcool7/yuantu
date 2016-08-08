@@ -25,7 +25,10 @@
     self = [super init];
     if (self)
     {
-        self.version = @"1.0";
+        NSBundle *mainBundle = [NSBundle mainBundle];
+        
+        self.version = [NSString stringWithFormat:@"%@.%@",[mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"],[mainBundle objectForInfoDictionaryKey:@"CFBundleVersion"]];
+        
         self.appStoreUrl = @"https://itunes.apple.com/us/app/yuan-tu/id1128271704?l=zh&ls=1&mt=8";
     }
     return self;

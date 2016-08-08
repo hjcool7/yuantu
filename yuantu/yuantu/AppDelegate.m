@@ -13,6 +13,8 @@
 #import "QQApiManager.h"
 #import "WeiboApiManager.h"
 #import "AppInfoManager.h"
+#import "WelcomeView.h"
+#import "UserPreference.h"
 #import <UMMobClick/MobClick.h>
 
 @interface AppDelegate ()
@@ -84,7 +86,17 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     NavigationController *nav = [[NavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
     self.window.rootViewController = nav;
+    
     [self.window makeKeyAndVisible];
+    
+    NSString *currentVersion = [AppInfoManager sharedManager].version;
+    NSString *savedVersion = [UserPreference sharedPreference].currentVersion;
+    if (!savedVersion || ![currentVersion isEqualToString:savedVersion])
+    {
+        WelcomeView *welcomeView = [[WelcomeView alloc] initWithFrame:self.window.bounds];
+        [self.window addSubview:welcomeView];
+        [UserPreference sharedPreference].currentVersion = currentVersion;
+    }
 
     [[WXApiManager sharedManager] registerApp];
     [[QQApiManager sharedManager] registerApp];

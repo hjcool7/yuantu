@@ -239,6 +239,8 @@
 		38EADFBC1D489DEA0026FF2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38EADFBB1D489DEA0026FF2E /* Foundation.framework */; };
 		38EADFBF1D4D97250026FF2E /* AppInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EADFBE1D4D97250026FF2E /* AppInfoManager.m */; };
 		38EADFC21D4DDBFD0026FF2E /* QRCodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EADFC11D4DDBFD0026FF2E /* QRCodeUtil.m */; };
+		38EADFD11D586E5F0026FF2E /* UserPreference.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EADFD01D586E5F0026FF2E /* UserPreference.m */; };
+		38EADFD41D586F5A0026FF2E /* WelcomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EADFD31D586F5A0026FF2E /* WelcomeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -715,6 +717,10 @@
 		38EADFBE1D4D97250026FF2E /* AppInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppInfoManager.m; sourceTree = "<group>"; };
 		38EADFC01D4DDBFD0026FF2E /* QRCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeUtil.h; sourceTree = "<group>"; };
 		38EADFC11D4DDBFD0026FF2E /* QRCodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeUtil.m; sourceTree = "<group>"; };
+		38EADFCF1D586E5F0026FF2E /* UserPreference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPreference.h; sourceTree = "<group>"; };
+		38EADFD01D586E5F0026FF2E /* UserPreference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPreference.m; sourceTree = "<group>"; };
+		38EADFD21D586F5A0026FF2E /* WelcomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeView.h; sourceTree = "<group>"; };
+		38EADFD31D586F5A0026FF2E /* WelcomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -846,6 +852,8 @@
 				383299AB1D3CD0EF0057EFEA /* SharePictureViewController.m */,
 				383299AD1D3CD2530057EFEA /* AboutViewController.h */,
 				383299AE1D3CD2530057EFEA /* AboutViewController.m */,
+				38EADFD21D586F5A0026FF2E /* WelcomeView.h */,
+				38EADFD31D586F5A0026FF2E /* WelcomeView.m */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -861,6 +869,8 @@
 		383299671D3742E60057EFEA /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				38EADFCF1D586E5F0026FF2E /* UserPreference.h */,
+				38EADFD01D586E5F0026FF2E /* UserPreference.m */,
 				383299A11D3CCE0D0057EFEA /* UIButton+BackgroundColor.h */,
 				383299A21D3CCE0D0057EFEA /* UIButton+BackgroundColor.m */,
 				383299A31D3CCE0D0057EFEA /* UIColor+Hex.h */,
@@ -1524,6 +1534,7 @@
 				38EADF121D47143E0026FF2E /* GPUImageContrastFilter.m in Sources */,
 				38EADF441D47143E0026FF2E /* GPUImageLightenBlendFilter.m in Sources */,
 				38EADF161D47143E0026FF2E /* GPUImageDarkenBlendFilter.m in Sources */,
+				38EADFD41D586F5A0026FF2E /* WelcomeView.m in Sources */,
 				38EADF7E1D47143E0026FF2E /* GPUImageSolidColorGenerator.m in Sources */,
 				38EADF141D47143E0026FF2E /* GPUImageCrosshairGenerator.m in Sources */,
 				38EADF5E1D47143E0026FF2E /* GPUImageOverlayBlendFilter.m in Sources */,
@@ -1536,6 +1547,7 @@
 				38EADF591D47143E0026FF2E /* GPUImageNonMaximumSuppressionFilter.m in Sources */,
 				38EADF571D47143E0026FF2E /* GPUImageMultiplyBlendFilter.m in Sources */,
 				38EADF7F1D47143E0026FF2E /* GPUImageSourceOverBlendFilter.m in Sources */,
+				38EADFD11D586E5F0026FF2E /* UserPreference.m in Sources */,
 				38EADF4D1D47143E0026FF2E /* GPUImageLuminosityBlendFilter.m in Sources */,
 				38EADF831D47143E0026FF2E /* GPUImageSubtractBlendFilter.m in Sources */,
 				38EADF4F1D47143E0026FF2E /* GPUImageMedianFilter.m in Sources */,
